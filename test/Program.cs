@@ -20,9 +20,10 @@ internal class Program
             else stonks.Add(index, int.Parse(lines[3 * i + 1].Split().Last()));
             node.SetBorders(int.Parse(lines[i * 3 + 2].Split().First()), int.Parse(lines[i * 3 + 2].Split().Last()));
         }
+
         stonks = stonks.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         if (Node.CheckCompatible(source)) Console.WriteLine("Система совместна");
-        else Console.WriteLine("Система несовместна");
+        else { Console.WriteLine("Система несовместна"); Environment.Exit(0); }
         int criteria = 0;
         foreach (var item in stonks)
         {
