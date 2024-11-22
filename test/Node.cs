@@ -15,7 +15,6 @@ namespace test
         public Node(int index)
         {
             Childrens = new();
-            Parent = parent;
             Index = index;
         }
         public static void Print(Node root)
