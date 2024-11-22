@@ -17,30 +17,30 @@ namespace test
             Childrens = new();
             Index = index;
         }
-        public static void Print(Node root)
+        public static void Print(Node source)
         {
-            Console.Write($"{root.Index}. {root.LowerBorder} - {root.UpperBorder}\n");
-            foreach (var item in root.Childrens)
+            Console.Write($"{source.Index}. {source.LowerBorder} - {source.UpperBorder}\n");
+            foreach (var item in source.Childrens)
             {
                 Print(item);
             }
         }
-        public static Node Find(Node root, int index)
+        public static Node Find(Node source, int index)
         {
-            if (root.Index == index) return root;
-            foreach (var item in root.Childrens)
+            if (source.Index == index) return source;
+            foreach (var item in source.Childrens)
             {
                 Node node = Find(item, index);
                 if (node != null) return node;
             }
             return null;
         }
-        public static bool CheckCompatible(Node root)
+        public static bool CheckCompatible(Node source)
         {
             List<int> lowerBorders = new();
             List<int> upperBorders = new();
-            CalcMax(root, lowerBorders);
-            CalcMin(root, upperBorders);
+            CalcMax(source, lowerBorders);
+            CalcMin(source, upperBorders);
             for(int i = 0; i < lowerBorders.Count; i++)
             {
                 if (lowerBorders[i] > upperBorders[i]) return false;
