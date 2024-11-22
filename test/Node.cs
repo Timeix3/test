@@ -43,7 +43,6 @@ namespace test
             CalcMin(root, upperBorders);
             for(int i = 0; i < lowerBorders.Count; i++)
             {
-                Console.WriteLine($"{lowerBorders[i]} <= {upperBorders[i]}");
                 if (lowerBorders[i] > upperBorders[i]) return false;
             }
             return true;
