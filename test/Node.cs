@@ -50,7 +50,7 @@ namespace test
         static int CalcMax(Node node, List<int> lowerBorders)
         {
             int value;
-            if (node.Childrens.Count != 0) value = Math.Max(node.LowerBorder, node.Childrens.Sum(node=>CalcMax(node, lowerBorders)));
+            if (node.Childrens.Count != 0) value = Math.Max(node.LowerBorder, node.Childrens.Sum(node => CalcMax(node, lowerBorders)));
             else value = node.LowerBorder;
             lowerBorders.Add(value);
             return value;
@@ -58,7 +58,7 @@ namespace test
         static int CalcMin(Node node, List<int> upperBorders)
         {
             int value;
-            if (node.Childrens.Count != 0) value = Math.Min(node.UpperBorder, node.Childrens.Sum(node=>CalcMin(node, upperBorders)));
+            if (node.Childrens.Count != 0) value = Math.Min(node.UpperBorder, node.Childrens.Sum(node => CalcMin(node, upperBorders)));
             else value = node.UpperBorder;
             upperBorders.Add(value);
             return value;
