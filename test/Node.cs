@@ -27,18 +27,16 @@ namespace test
             UpperBorder = upperBorder;
             CurrentValue = lowerBorder;
         }
-        public static void AddResource(Node node)
+        public void AddResource()
         {
-            node.Parent.CurrentValue = node.Parent.Childrens.Sum(child => child.CurrentValue);
-            int resourceToAdd = node.UpperBorder - node.LowerBorder;
-            if (node.Parent.CurrentValue + resourceToAdd <= node.Parent.UpperBorder)
-                node.CurrentValue += resourceToAdd;
-            else do
-                {
-                    resourceToAdd--;
-                    if (node.Parent.CurrentValue + resourceToAdd <= node.Parent.UpperBorder)
-                    { node.CurrentValue += resourceToAdd; break; }
-                } while (resourceToAdd > 1);
+            Parent.CurrentValue = Parent.Childrens.Sum(child => child.CurrentValue);
+            int resourceToAdd = UpperBorder - LowerBorder;
+            do
+            {
+                if (Parent.CurrentValue + resourceToAdd <= Parent.UpperBorder)
+                { CurrentValue += resourceToAdd; break; }
+                resourceToAdd--;
+            } while (resourceToAdd > 1);
         }
         public static void PrintJobs(Node source)
         {
