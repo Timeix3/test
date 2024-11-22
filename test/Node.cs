@@ -12,8 +12,7 @@ namespace test
         public int LowerBorder { get; set; }
         public int UpperBorder { get; set; }
         public List<Node> Childrens { get; set; }
-        public Node Parent { get; set; }
-        public Node(Node parent, int index)
+        public Node(int index)
         {
             Childrens = new();
             Parent = parent;
