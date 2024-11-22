@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,21 +9,44 @@ namespace test
 {
     internal class Node
     {
-        public int Index { get; set; }
-        public int LowerBorder { get; set; }
-        public int UpperBorder { get; set; }
+        int Index { get; set; }
+        int LowerBorder { get; set; }
+        int UpperBorder { get; set; }
+        public int CurrentValue { get; set; }
         public List<Node> Childrens { get; set; }
-        public Node(int index)
+        Node Parent { get; set; }
+        public Node(Node parent, int index)
         {
             Childrens = new();
+            Parent = parent;
             Index = index;
         }
-        public static void Print(Node source)
+        public void SetBorders(int lowerBorder, int upperBorder)
         {
-            Console.Write($"{source.Index}. {source.LowerBorder} - {source.UpperBorder}\n");
+            LowerBorder = lowerBorder;
+            UpperBorder = upperBorder;
+            CurrentValue = lowerBorder;
+        }
+        public static void AddResource(Node node)
+        {
+            node.Parent.CurrentValue = node.Parent.Childrens.Sum(child => child.CurrentValue);
+            int resourceToAdd = node.UpperBorder - node.LowerBorder;
+            if (node.Parent.CurrentValue + resourceToAdd <= node.Parent.UpperBorder)
+                node.CurrentValue += resourceToAdd;
+            else do
+                {
+                    resourceToAdd--;
+                    if (node.Parent.CurrentValue + resourceToAdd <= node.Parent.UpperBorder)
+                    { node.CurrentValue += resourceToAdd; break; }
+                } while (resourceToAdd > 1);
+        }
+        public static void PrintJobs(Node source)
+        {
+            if (source.Childrens.Count == 0)
+                Console.Write($"{source.Index}. A={source.LowerBorder} B={source.UpperBorder} X={source.CurrentValue}\n");
             foreach (var item in source.Childrens)
             {
-                Print(item);
+                PrintJobs(item);
             }
         }
         public static Node Find(Node source, int index)
