@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace test
+﻿
+namespace PlanningTask
 {
     internal class Node
     {
@@ -38,13 +32,13 @@ namespace test
                 resourceToAdd--;
             } while (resourceToAdd > 1);
         }
-        public static void PrintJobs(Node source)
+        public static void PrintJobs(Node source, Dictionary<int, int> profit)
         {
             if (source.Childrens.Count == 0)
-                Console.Write($"{source.Index}. A={source.LowerBorder} B={source.UpperBorder} X={source.CurrentValue}\n");
+                Console.Write($"{source.Index}. A={source.LowerBorder} B={source.UpperBorder} X={source.CurrentValue} C={profit[source.Index]}\n");
             foreach (var item in source.Childrens)
             {
-                PrintJobs(item);
+                PrintJobs(item, profit);
             }
         }
         public static Node Find(Node source, int index)
